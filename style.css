@@ -1,0 +1,182 @@
+body {
+    display: flex;
+    justify-content: center;
+    background: #0f0f0f; /* Dark background for the page */
+    color: #ffffff; /* Default text color for contrast */
+}
+
+.chatbot-container {
+    width: 500px;
+    margin: 0 auto;
+    background-color: #1e1e1e; /* Dark background for the chatbot container */
+    border: 1px solid #00bfff; /* Bright blue border */
+    border-radius: 10px; /* Slightly rounded corners for a techy look */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Stronger shadow for depth */
+}
+
+#header {
+    background-color: #000000; /* Black background for the header */
+    color: #00bfff; /* Bright blue text for contrast */
+    padding: 20px;
+    font-size: 1.2em; /* Larger font size for emphasis */
+    font-weight: bold;
+    text-align: center; /* Center the text */
+}
+
+.message-container {
+    background: #2a2a2a; /* Dark background for the message container */
+    width: 100%;
+    display: flex;
+    align-items: center;
+    border-top: 1px solid #00bfff; /* Blue border at the top */
+}
+
+#conversation {
+    height: 500px;
+    overflow-y: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    background-color: #1e1e1e; /* Dark background for the conversation area */
+}
+
+@keyframes message-fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.chatbot-message {
+    display: flex;
+    align-items: flex-start;
+    position: relative;
+    font-size: 16px;
+    line-height: 20px;
+    border-radius: 15px;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    max-width: 100%;
+    padding: 10px 15px;
+}
+
+.user-message {
+    justify-content: flex-end;
+}
+
+.chatbot-text {
+    background-color: #333333; /* Dark gray background for messages */
+    color: #00bfff; /* Bright blue text for messages */
+    font-size: 1.1em;
+    padding: 15px;
+    border-radius: 10px; /* Rounded corners for messages */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.7); /* Darker shadow for messages */
+}
+
+#input-form {
+    display: flex;
+    align-items: center;
+    border-top: 1px solid #00bfff; /* Blue border at the top of the input form */
+    background: #2a2a2a; /* Dark background for the input form */
+}
+
+#input-field {
+    flex: 1;
+    height: 60px;
+    border: 1px solid #00bfff; /* Blue border for the input field */
+    border-radius: 4px;
+    padding: 0 10px;
+    font-size: 14px;
+    background: #1e1e1e; /* Dark background for the input field */
+    color: #ffffff; /* White text color */
+    border: none;
+}
+
+.send-icon {
+    margin-right: 10px;
+    cursor: pointer;
+    filter: brightness(0) invert(1); /* White icon */
+}
+
+#input-field:focus {
+    border-color: #00bfff; /* Blue border on focus */
+    outline: none;
+}
+
+#submit-button {
+    background-color: transparent;
+    border: none;
+}
+
+p[sentTime]:hover::after {    
+    content: attr(sentTime);
+    position: absolute;
+    top: -3px;
+    font-size: 14px;
+    color: #00bfff; /* Blue color for the timestamp */
+}
+
+.chatbot p[sentTime]:hover::after {  
+    left: 15px;
+}
+
+.user-message p[sentTime]:hover::after {  
+    right: 15px;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1e1e1e; /* Dark background for the scrollbar track */
+}
+
+::-webkit-scrollbar-thumb {
+    background: #00bfff; /* Bright blue for the scrollbar thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #0088cc; /* Darker blue on hover */
+}
+.typing-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.typing-indicator span {
+    display: block;
+    width: 8px;
+    height: 8px;
+    margin: 0 4px;
+    border-radius: 50%;
+    background: #00bfff; /* Blue color for the typing dots */
+    animation: typing 0.8s infinite;
+}
+
+.typing-indicator span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.typing-indicator span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes typing {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}

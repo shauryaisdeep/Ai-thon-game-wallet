@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game NFT Showcase</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .header {
+            background-color: #00aaff; /* Sky Blue */
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+            flex: 1;
+        }
+        .nft-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .nft-item {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 300px;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+        }
+        .nft-item img {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+        .nft-item h3 {
+            margin: 10px 0;
+        }
+        .nft-item p {
+            color: #666;
+        }
+        .nft-item button {
+            background-color: #00aaff; /* Sky Blue */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        .nft-item button:hover {
+            background-color: #0088cc; /* Darker Sky Blue */
+        }
+        .footer {
+            background-color: #00aaff; /* Sky Blue */
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Unite FPS NFT Showcase</h1>
+        <p>Discover and trade unique NFTs for our exciting game!</p>
+    </div>
+
+    <div class="container">
+        <div class="nft-gallery">
+            <div class="nft-item">
+                <img src="https://img.icons8.com/ios/452/test-tube.png" alt="Rare Potion">
+                <h3>Rare Potion</h3>
+                <p>Rarity: Rare</p>
+                <p>Price: 3 ETH</p>
+                <button onclick="buyNFT(0)">Buy Now</button>
+            </div>
+            <div class="nft-item">
+                <img src="https://img.icons8.com/ios/452/skull.png" alt="Zombie Skull">
+                <h3>Zombie Skull</h3>
+                <p>Rarity: Legendary</p>
+                <p>Price: 6 ETH</p>
+                <button onclick="buyNFT(1)">Buy Now</button>
+            </div>
+            <div class="nft-item">
+                <img src="https://img.icons8.com/ios/452/virus.png" alt="2099 Virus Syndicate">
+                <h3>2099 Virus Syndicate</h3>
+                <p>Rarity: Epic</p>
+                <p>Price: 9 ETH</p>
+                <button onclick="buyNFT(2)">Buy Now</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2024 Unite FPS NFT Showcase. All rights reserved.</p>
+    </div>
+
+    <!-- Include Web3.js -->
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.8.2/dist/web3.min.js"></script>
+    <script>
+        const contractAddress = '0xYourContractAddress'; // Replace with your contract address
+        const contractABI = [/* ABI Array from Contract Compilation */]; // Replace with your contract ABI
+
+        async function buyNFT(tokenId) {
+            if (typeof window.ethereum !== 'undefined') {
+                const web3 = new Web3(window.ethereum);
+
+                try {
+                    await window.ethereum.request({ method: 'eth_requestAccounts' });
+
+                    const accounts = await web3.eth.getAccounts();
+                    const account = accounts[0];
+
+                    const contract = new web3.eth.Contract(contractABI, contractAddress);
+
+                    const priceInWei = await contract.methods.getPrice(tokenId).call();
+                    
+                    await contract.methods.buyNFT(tokenId).send({ from: account, value: priceInWei });
+
+                    alert('Transaction successful!');
+                } catch (error) {
+                    console.error('User denied account access or transaction error:', error);
+                    alert('Transaction failed or canceled.');
+                }
+            } else {
+                alert('MetaMask is not installed. Please install MetaMask and try again.');
+            }
+        }
+    </script>
+</body>
+</html>

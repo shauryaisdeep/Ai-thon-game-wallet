@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Run Local File</title>
+</head>
+<body>
+    <h1>Run Local File</h1>
+    <p>Click the button below to run the local .exe file:</p>
+    <button onclick="runFile()">Run Local File</button>
+
+    <script>
+        function runFile() {
+            try {
+                // This code only works in Internet Explorer due to security restrictions.
+                var shell = new ActiveXObject("WScript.Shell");
+                shell.Run("C:\\path\\to\\fps.exe");
+            } catch (e) {
+                alert("Your browser does not support running local files.");
+            }
+        }
+    </script>
+</body>
+</html>
